@@ -13,6 +13,19 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  nix.settings = {
+    substituters = [
+      "https://cache.nixos.org/"
+      "https://attic.xuyh0120.win/lantian"
+      "https://cache.puppygirls.net/main"
+    ];
+
+    trusted-public-keys = [
+      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+      "main:OiT7TySueZMWxt1dpP7/SVwyhOwWu4L11tm1QhT2Qd8="
+    ];
+  };
+
   # NOTE: Why are flakes still experimental?
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -30,7 +43,7 @@
     kernelParams = [
 
     ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
   };
 
   networking = {

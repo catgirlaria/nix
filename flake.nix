@@ -1,4 +1,6 @@
 {
+  description = "Delusion flake (codeberg.org/catgirlaria/nix)";
+
   inputs = {
     # This is pointing to an unstable release.
     # If you prefer a stable release instead, you can change the word unstable to the latest number shown here: https://nixos.org/download
@@ -20,6 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
   };
   outputs = { self, nixpkgs, ... }@inputs:
     let
@@ -46,6 +49,11 @@
           home-manager.extraSpecialArgs = { inherit inputs glob; };
           home-manager.backupFileExtension = "bak";
           home-manager.users.${glob.USER} = ./users/${glob.USER}/home.nix;
+        }
+        {
+          nixpkgs.overlays = [
+            inputs.nix-cachyos-kernel.overlays.pinned
+          ];
         }
         inputs.disko.nixosModules.disko
         inputs.preservation.nixosModules.default
