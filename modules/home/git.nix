@@ -2,10 +2,24 @@
 
 let
   gitSigningKeyCommand = pkgs.writeShellScript "git-signing-key" ''
-    key="$(${lib.getExe' pkgs.openssh "ssh-add"} -L | ${lib.getExe' pkgs.coreutils "head"} -n 1)"
+    set -euo pipefail
+
+    keys="$(${lib.getExe' pkgs.openssh "ssh-add"} -L)"
+
+    if [ -z "$keys" ]; then
+      echo "No SSH keys available from 1Password agent" >&2
+      exit 1
+    fi
+
+    key="$(printf '%s\n' "$keys" | ${lib.getExe pkgs.fzf} \
+      --prompt='SSH signing key > ' \
+      --height=40% \
+      --layout=reverse \
+      --border \
+      --header='Select the key to sign this commit')"
 
     if [ -z "$key" ]; then
-      echo "No SSH key available from agent" >&2
+      echo "No SSH signing key selected" >&2
       exit 1
     fi
 
