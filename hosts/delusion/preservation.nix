@@ -23,6 +23,7 @@
         "/var/lib"
         "/var/log"
         "/etc/nixos"
+        "/var/lib/flatpak"
         "/var/db/sudo/lectured"
         "/etc/NetworkManager/system-connections"
       ];

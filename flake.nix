@@ -28,10 +28,19 @@
       url = "github:yunfachi/nixowos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixcord.url = "github:4evy/nixcord";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs =
+    { nixpkgs, ... }@inputs:
     let
-      glob = rec {
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+      glob = {
         HOSTNAME = "delusion";
         TZ = "America/Chicago";
         LOCALE = "en_US.UTF-8";
@@ -39,31 +48,53 @@
       };
       # doesn't need to be global var
       HOST_DIR = ./hosts/${glob.HOSTNAME};
-    in {
-    nixosConfigurations.${glob.HOSTNAME} = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      preCommit = inputs.git-hooks.lib.${system}.run {
+        src = ./.;
 
-      specialArgs = { inherit inputs glob; };
+        hooks = {
+          nixfmt.enable = true;
 
-      modules = [
-        inputs.home-manager.nixosModules.home-manager
-        inputs.nixowos.nixosModules.default
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.sharedModules = [ inputs.nixowos.homeModules.default inputs.plasma-manager.homeModules.plasma-manager ];
-          home-manager.extraSpecialArgs = { inherit inputs glob; };
-          home-manager.backupFileExtension = "bak";
-          home-manager.users.${glob.USER} = ./users/${glob.USER}/home.nix;
-        }
-        inputs.chaotic.nixosModules.default
-        inputs.disko.nixosModules.disko
-        inputs.preservation.nixosModules.default
-        (HOST_DIR + "/config.nix")
-        (HOST_DIR + "/preservation.nix")
-        (HOST_DIR + "/disko.nix")
-      ];
+          # nice extras
+          statix.enable = true;
+          deadnix.enable = true;
+        };
+      };
+    in
+    {
+      checks.${system}.pre-commit-check = preCommit;
+      devShells.${system}.default = pkgs.mkShell {
+        inherit (preCommit) shellHook;
+        buildInputs = preCommit.enabledPackages;
+      };
+      nixosConfigurations.${glob.HOSTNAME} = nixpkgs.lib.nixosSystem {
+
+        specialArgs = { inherit inputs glob; };
+
+        modules = [
+          inputs.home-manager.nixosModules.home-manager
+          inputs.nixowos.nixosModules.default
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              sharedModules = [
+                inputs.nixowos.homeModules.default
+                inputs.plasma-manager.homeModules.plasma-manager
+                inputs.nixcord.homeModules.nixcord
+              ];
+              extraSpecialArgs = { inherit inputs glob; };
+              backupFileExtension = "bak";
+              users.${glob.USER} = ./users/${glob.USER}/home.nix;
+            };
+          }
+          inputs.chaotic.nixosModules.default
+          inputs.disko.nixosModules.disko
+          inputs.preservation.nixosModules.default
+          inputs.nix-flatpak.nixosModules.nix-flatpak
+          (HOST_DIR + "/config.nix")
+          (HOST_DIR + "/preservation.nix")
+          (HOST_DIR + "/disko.nix")
+        ];
+      };
     };
-  };
 }
-

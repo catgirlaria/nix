@@ -1,4 +1,4 @@
-{ pkgs, glob, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -20,51 +20,61 @@
     eza
   ];
 
-  programs.kitty = {
-    enable = true;
-    font = {
-      name = "FiraCode Nerd Font";
-      size = 13;
-      package = pkgs.nerd-fonts.fira-code;
+  programs = {
+
+    kitty = {
+      enable = true;
+      font = {
+        name = "FiraCode Nerd Font";
+        size = 13;
+        package = pkgs.nerd-fonts.fira-code;
+      };
+
+      settings = {
+        disable_ligatures = "never";
+      };
     };
 
-    settings = {
-      disable_ligatures = "never";
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
     };
-  };
 
-  programs.zoxide = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-
-  programs.fish = {
-    interactiveShellInit = ''
-      if status is-interactive
-        fastfetch
-        echo
-      end
-    '';
-    functions = {
-      fish_greeting = "";
-    };
-    plugins = [
-      { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
-      { name = "tide"; src = pkgs.fishPlugins.tide.src; }
-    ];
-    shellAliases = {
-      ls = "eza --icons=always --group-directories-first";
-      nhs = "nh os switch";
-      nhb = "nh os boot";
-      clean = "nh clean all";
-      addsw = "git add ~/nixos/. && nh os switch";
-      cat = "bat";
-      cd = "z";
-      gs = "git status";
-      ga = "git add";
-      gc = "git commit";
-      gp = "git push";
-      gl = "git log --oneline --graph --decorate";
+    fish = {
+      interactiveShellInit = ''
+        if status is-interactive
+          fastfetch
+          echo
+        end
+      '';
+      functions = {
+        fish_greeting = "";
+      };
+      plugins = [
+        {
+          name = "autopair";
+          src = pkgs.fishPlugins.autopair.src;
+        }
+        {
+          name = "tide";
+          src = pkgs.fishPlugins.tide.src;
+        }
+      ];
+      shellAliases = {
+        ls = "eza --icons=always --group-directories-first";
+        nd = "cd ~/nixos && nix develop -c fish";
+        nhs = "nh os switch";
+        nhb = "nh os boot";
+        clean = "nh clean all";
+        addsw = "git add ~/nixos/. && nh os switch";
+        cat = "bat";
+        cd = "z";
+        gs = "git status";
+        ga = "git add";
+        gc = "git commit";
+        gp = "git push";
+        gl = "git log --oneline --graph --decorate";
+      };
     };
   };
 }
