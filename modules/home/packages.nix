@@ -63,6 +63,7 @@
       shellAliases = {
         ls = "eza --icons=always --group-directories-first";
         nd = "cd ~/nixos && nix develop -c fish";
+        ff = "fastfetch";
         nhs = "nh os switch";
         nhb = "nh os boot";
         clean = "nh clean all";
