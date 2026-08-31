@@ -1,5 +1,5 @@
 # the delusional flake!
 
-<p align="center">
+<p align="center" width="20%">
   <img src="./assets/aria.png" />
 </p>
