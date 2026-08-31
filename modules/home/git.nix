@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 let
+  # This script basically lets me choose from among my 1password SSH keys interactively when committin
+  # so I don't need to change configs for every project I'm working on
   gitSigningKeyCommand = pkgs.writeShellScript "git-signing-key" ''
     set -euo pipefail
 
@@ -13,7 +15,7 @@ let
 
     key="$(printf '%s\n' "$keys" | ${lib.getExe pkgs.fzf} \
       --prompt='SSH signing key > ' \
-      --height=40% \
+      --height=40%
       --layout=reverse \
       --border \
       --header='Select the key to sign this commit')"
