@@ -22,7 +22,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    # BLAZINGLY FAST 🔥🔥🔥🔥🔥
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
   outputs = { self, nixpkgs, ... }@inputs:
     let
@@ -50,11 +51,7 @@
           home-manager.backupFileExtension = "bak";
           home-manager.users.${glob.USER} = ./users/${glob.USER}/home.nix;
         }
-        {
-          nixpkgs.overlays = [
-            inputs.nix-cachyos-kernel.overlays.pinned
-          ];
-        }
+        inputs.chaotic.nixosModules.default
         inputs.disko.nixosModules.disko
         inputs.preservation.nixosModules.default
         (HOST_DIR + "/config.nix")

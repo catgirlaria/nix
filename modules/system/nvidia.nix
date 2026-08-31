@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, ... }:
 
 {
   hardware.graphics.enable = true;
@@ -7,6 +7,6 @@
     open = true;
     nvidiaSettings = true;
     modesetting.enable = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = pkgs.nvidia_cachyos;
   };
 }

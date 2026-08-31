@@ -16,12 +16,10 @@
   nix.settings = {
     substituters = [
       "https://cache.nixos.org/"
-      "https://attic.xuyh0120.win/lantian"
       "https://cache.puppygirls.net/main"
     ];
 
     trusted-public-keys = [
-      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       "main:OiT7TySueZMWxt1dpP7/SVwyhOwWu4L11tm1QhT2Qd8="
     ];
   };
@@ -43,7 +41,7 @@
     kernelParams = [
 
     ];
-    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
+    kernelPackages = pkgs.linuxPackages_cachyos;
   };
 
   networking = {
