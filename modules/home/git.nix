@@ -13,12 +13,7 @@ let
       exit 1
     fi
 
-    key="$(printf '%s\n' "$keys" | ${lib.getExe pkgs.fzf} \
-      --prompt='SSH signing key > ' \
-      --height=40%
-      --layout=reverse \
-      --border \
-      --header='Select the key to sign this commit')"
+    key="$(printf '%s\n' "$keys" | ${lib.getExe pkgs.fzf})"
 
     if [ -z "$key" ]; then
       echo "No SSH signing key selected" >&2
