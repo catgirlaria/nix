@@ -48,13 +48,12 @@
       };
       # doesn't need to be global var
       HOST_DIR = ./hosts/${glob.HOSTNAME};
+      # git-hooks shenanigans
       preCommit = inputs.git-hooks.lib.${system}.run {
         src = ./.;
 
         hooks = {
           nixfmt.enable = true;
-
-          # nice extras
           statix.enable = true;
           deadnix.enable = true;
         };
