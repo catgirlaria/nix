@@ -41,13 +41,13 @@
         {
           type = "kernel";
           key = "├─   kernel";
-          keyColor = "light_magenta";
+          keyColor = "magenta";
         }
 
         {
           type = "uptime";
           key = "╰─ 󰅐  uptime";
-          keyColor = "light_magenta";
+          keyColor = "magenta";
         }
 
         "break"
@@ -68,13 +68,13 @@
         {
           type = "terminal";
           key = "├─   terminal";
-          keyColor = "light_cyan";
+          keyColor = "cyan";
         }
 
         {
           type = "shell";
           key = "╰─   shell";
-          keyColor = "light_cyan";
+          keyColor = "cyan";
         }
 
         "break"
@@ -95,14 +95,14 @@
         {
           type = "memory";
           key = "├─   memory";
-          keyColor = "light_blue";
+          keyColor = "blue";
         }
 
         {
           type = "disk";
-          key = "╰─ 󰋊  disk";
-          keyColor = "light_blue";
-          folders = "/";
+          key = "╰─ 󰋊  disk (/persist)";
+          keyColor = "blue";
+          folders = "/persist";
         }
 
         "break"
