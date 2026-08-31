@@ -6,6 +6,8 @@
 
   # OwO!
   nixowos.enable = true;
+  # broken
+  nixowos.overlays.hyfetch = false;
 
   programs.fish.enable = true;
   

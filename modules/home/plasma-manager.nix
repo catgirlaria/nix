@@ -11,6 +11,8 @@
     workspace.widgetStyle = "darkly";
     powerdevil.AC.autoSuspend.action = "nothing";
     session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
+
+    spectacle.shortcuts.launch = "Pause";
   };
 
   programs.kate = {

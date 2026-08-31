@@ -13,6 +13,8 @@
 
   # OwO!
   nixowos.enable = true;
+  # broken
+  nixowos.overlays.hyfetch = false;
 
   nixpkgs.config.allowUnfree = true;
 
