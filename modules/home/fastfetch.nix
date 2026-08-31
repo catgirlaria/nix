@@ -1,144 +1,135 @@
-{ glob, ...}:
-
 {
-	programs.fastfetch = {
-		enable = true;
+  programs.fastfetch = {
+    enable = true;
 
-		settings = {
-			logo = {
-				type = "kitty";
-				source = "~/nixos/assets/nixowos.png";
+    settings = {
+      logo = {
+        type = "kitty";
+        source = "~/nixos/assets/nixowos.png";
 
-				width = 24;
+        width = 24;
 
-				padding = {
-					top = 1;
-					right = 4;
-				};
-			};
+        padding = {
+          top = 1;
+          right = 4;
+        };
+      };
 
-			display = {
-				separator = "  ";
+      display = {
+        separator = "  ";
 
-				key = {
-					width = 16;
-				};
-			};
+        key = {
+          width = 16;
+        };
+      };
 
-			modules = [
-				"break"
-				"break"
-				{
-					type = "os";
-					key = "├─   os";
-					keyColor = "magenta";
-				}
+      modules = [
+        "break"
+        "break"
+        {
+          type = "os";
+          key = "├─   os";
+          keyColor = "magenta";
+        }
 
-				{
-					type = "host";
-					key = "├─ 󰌢  host";
-					keyColor = "magenta";
-				}
+        {
+          type = "host";
+          key = "├─ 󰌢  host";
+          keyColor = "magenta";
+        }
 
-				{
-					type = "kernel";
-					key = "├─   kernel";
-					keyColor = "light_magenta";
-				}
+        {
+          type = "kernel";
+          key = "├─   kernel";
+          keyColor = "light_magenta";
+        }
 
-				{
-					type = "uptime";
-					key = "╰─ 󰅐  uptime";
-					keyColor = "light_magenta";
-				}
+        {
+          type = "uptime";
+          key = "╰─ 󰅐  uptime";
+          keyColor = "light_magenta";
+        }
 
-				"break"
+        "break"
 
-				# Desktop
-				{
-					type = "de";
-					key = "╭─ 󰧨  desktop";
-					keyColor = "cyan";
-				}
+        # Desktop
+        {
+          type = "de";
+          key = "╭─ 󰧨  desktop";
+          keyColor = "cyan";
+        }
 
-				{
-					type = "wm";
-					key = "├─   wm";
-					keyColor = "cyan";
-				}
+        {
+          type = "wm";
+          key = "├─   wm";
+          keyColor = "cyan";
+        }
 
-				{
-					type = "terminal";
-					key = "├─   terminal";
-					keyColor = "light_cyan";
-				}
+        {
+          type = "terminal";
+          key = "├─   terminal";
+          keyColor = "light_cyan";
+        }
 
-				{
-					type = "shell";
-					key = "╰─   shell";
-					keyColor = "light_cyan";
-				}
+        {
+          type = "shell";
+          key = "╰─   shell";
+          keyColor = "light_cyan";
+        }
 
-				"break"
+        "break"
 
-				# Hardware
-				{
-					type = "cpu";
-					key = "╭─   cpu";
-					keyColor = "blue";
-				}
+        # Hardware
+        {
+          type = "cpu";
+          key = "╭─   cpu";
+          keyColor = "blue";
+        }
 
-				{
-					type = "gpu";
-					key = "├─ 󰢮  gpu";
-					keyColor = "blue";
-				}
+        {
+          type = "gpu";
+          key = "├─ 󰢮  gpu";
+          keyColor = "blue";
+        }
 
-				{
-					type = "memory";
-					key = "├─   memory";
-					keyColor = "light_blue";
-				}
+        {
+          type = "memory";
+          key = "├─   memory";
+          keyColor = "light_blue";
+        }
 
-				{
-					type = "disk";
-					key = "╰─ 󰋊  disk";
-					keyColor = "light_blue";
-					folders = "/";
-				}
+        {
+          type = "disk";
+          key = "╰─ 󰋊  disk";
+          keyColor = "light_blue";
+          folders = "/";
+        }
 
-				"break"
+        "break"
 
-				# Software
-				{
-					type = "packages";
-					key = "╭─ 󰏖  packages";
-					keyColor = "yellow";
-				}
+        # Software
+        {
+          type = "packages";
+          key = "╭─ 󰏖  packages";
+          keyColor = "yellow";
+        }
 
-				{
-					type = "display";
-					key = "├─ 󰹑  display";
-					keyColor = "yellow";
-				}
+        {
+          type = "display";
+          key = "├─ 󰹑  display";
+          keyColor = "yellow";
+        }
 
-				{
-					type = "localip";
-					key = "╰─ 󰩟  network";
-					keyColor = "light_yellow";
-					format = "{ipv4}";
-				}
+        "break"
 
-				"break"
-
-				{
-					type = "colors";
-					symbol = "circle";
-				}
-				"break"
-				"break"
-			];
-		};
-	};
+        {
+          type = "colors";
+          symbol = "circle";
+        }
+        "break"
+        "break"
+      ];
+    };
+  };
 
 }
