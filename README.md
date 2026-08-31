@@ -1,7 +1,7 @@
-<p align="center">
-  <h1>the delusional flake!</h1>
-</p>
+<div align="center">
 
-<p align="center">
-  <img src="./assets/aria.png" width="20%" />
-</p>
+<h1>the delusional flake!</h1>
+
+<img src="./assets/aria.png" width="20%" />
+
+</div>
