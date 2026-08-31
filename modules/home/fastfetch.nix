@@ -99,8 +99,14 @@
         }
 
         {
+          type = "swap";
+          key = "├─ 󰓡  swap";
+          keyColor = "blue";
+        }
+
+        {
           type = "disk";
-          key = "╰─ 󰋊  disk (/persist)";
+          key = "╰─ 󰋊  root";
           keyColor = "blue";
           folders = "/persist";
         }
