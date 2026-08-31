@@ -24,6 +24,10 @@
     };
     # BLAZINGLY FAST 🔥🔥🔥🔥🔥
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nixowos = {
+      url = "github:yunfachi/nixowos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { self, nixpkgs, ... }@inputs:
     let
@@ -43,10 +47,11 @@
 
       modules = [
         inputs.home-manager.nixosModules.home-manager
+        inputs.nixowos.nixosModules.default
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.sharedModules = [ inputs.plasma-manager.homeModules.plasma-manager ];
+          home-manager.sharedModules = [ inputs.nixowos.homeModules.default inputs.plasma-manager.homeModules.plasma-manager ];
           home-manager.extraSpecialArgs = { inherit inputs glob; };
           home-manager.backupFileExtension = "bak";
           home-manager.users.${glob.USER} = ./users/${glob.USER}/home.nix;

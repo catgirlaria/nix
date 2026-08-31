@@ -11,6 +11,9 @@
       (inputs.import-tree ../../modules/system)
     ];
 
+  # OwO!
+  nixowos.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
