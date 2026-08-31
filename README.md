@@ -1,3 +1,5 @@
-# Delusion Flake
+# the delusional flake!
 
-This is my flake that I created with everything I've learned over the past months regarding Nix.
+<p align="center">
+  <img src="assets/aria.png" />
+</p>
