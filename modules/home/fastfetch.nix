@@ -116,7 +116,7 @@
 
         {
           type = "display";
-          key = "├─ 󰹑  display";
+          key = "╰─ 󰹑  display";
           keyColor = "yellow";
         }
 
